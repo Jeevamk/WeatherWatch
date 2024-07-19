@@ -1,5 +1,6 @@
 import React from 'react'
-import weather from '../assets/weather.jpg'
+// import weather from '../assets/weather.webp'
+import weather from '../assets/weather.jpeg'
 
 const Background = () => {
   return (
