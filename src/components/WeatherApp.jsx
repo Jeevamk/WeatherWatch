@@ -1,4 +1,5 @@
 
+
 import React, { useEffect, useState } from 'react';
 import Background from './Background';
 import WeatherCard from './WeatherCard';
@@ -12,7 +13,7 @@ const WeatherApp = () => {
     useEffect(() => {
         const fetchWeatherData = async () => {
             try {
-                const response = await fetch('https://weatherwatch-backend.vercel.app/');
+                const response = await fetch('http://localhost:5001/');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
