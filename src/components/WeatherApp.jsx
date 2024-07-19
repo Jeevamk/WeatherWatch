@@ -1,27 +1,3 @@
-// import React from 'react'
-// import Background from './Background'
-// import WeatherCard from './WeatherCard'
-// import HourlyWeatherCard from './HourlyWeatherCard'
-// import About from './About'
-
-// const WeatherApp = () => {
-
-    
-//   return (
-//     <>
-//     <Background />
-//     <div className='flex flex-col md:flex-row justify-center items-center w-full'>
-//     <WeatherCard />
-//     <HourlyWeatherCard hourlyData={hourlyData} />
-//     </div>
-//     <About />
-    
-//     </>
-//   )
-// }
-
-// export default WeatherApp
-
 
 import React, { useEffect, useState } from 'react';
 import Background from './Background';
@@ -36,7 +12,7 @@ const WeatherApp = () => {
     useEffect(() => {
         const fetchWeatherData = async () => {
             try {
-                const response = await fetch('http://localhost:5001/');
+                const response = await fetch('https://weatherwatch-backend.vercel.app/');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -57,6 +33,7 @@ const WeatherApp = () => {
 
     const hourlyData = weatherData?.hourly.slice(0, 6) || [];    
     const weatherDetails = weatherData?.current || {};
+    const weatherDatas = weatherData
 
     return (
         <>
@@ -65,10 +42,12 @@ const WeatherApp = () => {
                 <div className="flex flex-col md:flex-row justify-center items-center w-full ">
                     <WeatherCard
                         temperature={weatherDetails.temp}
-                        description={weatherDetails.weather[0].description}
-                        timezone={weatherDetails.timezone}
+                        description={weatherDetails.weather[0].main}
+                        icon={weatherDetails.weather[0].icon}
+                        timezone={weatherDatas.timezone}
                         date={new Date().toLocaleDateString()}
                         feelsLike={weatherDetails.feels_like}
+                        sunset={weatherDetails.sunset}
                     />
                     <HourlyWeatherCard hourlyData={hourlyData.map(hour => ({
                         time: new Date(hour.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
